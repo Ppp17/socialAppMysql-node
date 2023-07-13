@@ -40,8 +40,7 @@ export const login = (req, res) => {
     if (!checkPassword)
       return res.status(400).json("Wrong password or username!");
 
-    const token = jwt.sign({ id: data[0].id }, "secretKey");
-
+    const token = jwt.sign({ id: data[0].id }, "secretkey");
     const { password, ...other } = data[0];
 
     res
@@ -53,5 +52,11 @@ export const login = (req, res) => {
   });
 };
 export const logout = (req, res) => {
-  res.send("this is logout");
+  res
+    .clearCookie("accessToken", {
+      secure: true,
+      sameSite: "none",
+    })
+    .status(200)
+    .json("User has been logged out.");
 };
