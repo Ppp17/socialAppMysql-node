@@ -30,7 +30,6 @@ export const getPosts = (req, res) => {
 };
 
 export const addPost = (req, res) => {
-  console.log("addpost");
   const token = req.cookies.accessToken;
   // 判断是否携带token
   if (!token) return res.status(401).json("Not Logged in!");
